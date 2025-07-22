@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite database (you can regenerate it from CSVs)
+*.db
+
+# Environment variables or API keys (if you add any)
+.env
+
+# Image outputs (visuals you generate)
+*.png
+
+# Log files
+*.log
+
+# Jupyter Notebook checkpoints (if you ever use .ipynb)
+.ipynb_checkpoints/
+
+# VSCode or PyCharm project files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
