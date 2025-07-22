@@ -1,8 +1,6 @@
-# setup_db.py
 import sqlite3
 import pandas as pd
 
-# Paths to your CSVs
 csv_files = {
     "eligibility": "eligibility.csv",
     "ad_sales": "ad_sales.csv",

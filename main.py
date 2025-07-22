@@ -21,14 +21,10 @@ Return ONLY the SQL query, without explanation. Use the exact column names as sh
 @app.route('/ask', methods=['POST'])
 def ask():
     user_question = request.json.get('question', '')
-    # Step 1: Rephrase the question into SQL using the LLM
     prompt = SYSTEM_PROMPT + f"\nUser question: {user_question}\nSQL:"
-    # ask_ollama returns only the SQL
     sql_query = ask_ollama(prompt).strip()
-    # Step 2: Run SQL on the database
     try:
         cols, rows = run_query(sql_query)
-        # Step 3: Compose a user-friendly answer
         result = [dict(zip(cols, row)) for row in rows]
         human_readable = f"Answer: {result}"
         return jsonify({
@@ -40,7 +36,6 @@ def ask():
     except Exception as e:
         return jsonify({"error": str(e), "sql_query": sql_query}), 400
 
-# (Bonus) Visualization endpoint
 @app.route('/ask/visual', methods=['POST'])
 def ask_visual():
     user_question = request.json.get('question', '')
@@ -48,7 +43,6 @@ def ask_visual():
     sql_query = ask_ollama(prompt)
     cols, rows = run_query(sql_query)
     plt.figure()
-    # Example: plotting the first two columns
     plt.bar([str(x[0]) for x in rows], [float(x[1]) for x in rows])
     plt.title(user_question)
     buf = io.BytesIO()
